@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+  /* Container for issues */
+  .issues-container {
+    margin-top: 30px;
+    animation: fadeIn 1s ease-out;
+  }
+
+  /* Card Styling */
+  .card {
+    border: none;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  }
+  
+  /* Card Body Text */
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #333;
+  }
+  .card-subtitle {
+    font-size: 0.9rem;
+    color: #777;
+  }
+  .card-text {
+    font-size: 0.95rem;
+    color: #555;
+  }
+  
+  /* Fade-in Animation */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+
+<div class="issues-container">
+  <h2 class="mb-4">Reported Issues</h2>
+  {% if issues %}
+    <div class="row">
+      {% for issue in issues %}
+        <div class="col-md-4 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{ issue.title }}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">{{ issue.category }}</h6>
+              <p class="card-text">
+                <strong>Location:</strong> {{ issue.location }}<br>
+                {{ issue.description }}
+              </p>
+              {% if issue.image_file %}
+                <img src="{{ url_for('static', filename='uploads/' ~ issue.image_file) }}" alt="Issue Image" class="img-fluid mt-2">
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No issues reported yet.</p>
+  {% endif %}
+</div>
+{% endblock %}

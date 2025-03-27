@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+  /* Container styling and animation */
+  .home-container {
+    margin-top: 50px;
+    animation: fadeIn 1s ease-out;
+  }
+  
+  .home-container h1 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .home-container p {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 30px;
+  }
+  
+  /* Button styling with hover animation */
+  .btn-custom {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .btn-custom:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Fade-in animation keyframes */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<div class="text-center home-container">
+  <h1>Welcome to CivilConnect</h1>
+  <p>Your platform for reporting and viewing community issues.</p>
+  {% if current_user.is_authenticated %}
+    <a href="{{ url_for('report_issue') }}" class="btn btn-primary btn-custom me-2">Report Issue</a>
+    <a href="{{ url_for('view_issues') }}" class="btn btn-secondary btn-custom">View Issues</a>
+  {% else %}
+    <a href="{{ url_for('login') }}" class="btn btn-primary btn-custom me-2">Login</a>
+    <a href="{{ url_for('register') }}" class="btn btn-secondary btn-custom">Register</a>
+  {% endif %}
+</div>
+{% endblock %}

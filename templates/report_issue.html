@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+  /* Form Container Styling */
+  .report-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px 40px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1s ease-out;
+  }
+  
+  /* Fade-in Animation */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* Input and Textarea Styling */
+  .report-container .form-control,
+  .report-container .form-select {
+    border-radius: 5px;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+  .report-container .form-control:focus,
+  .report-container .form-select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+    outline: none;
+  }
+  
+  /* Submit Button Styling and Animation */
+  .report-container .btn-primary {
+    border: none;
+    border-radius: 5px;
+    padding: 12px 20px;
+    font-size: 1rem;
+    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  }
+  .report-container .btn-primary:hover {
+    background-color: #0056b3;
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+</style>
+
+<div class="report-container">
+  <h2 class="mb-4 text-center">Report an Issue</h2>
+  <form method="POST" enctype="multipart/form-data">
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" class="form-control" id="title" name="title" required>
+    </div>
+    <div class="mb-3">
+      <label for="category" class="form-label">Category</label>
+      <select class="form-select" id="category" name="category" required>
+        <option value="Roads & Potholes">Roads & Potholes</option>
+        <option value="Drainage">Drainage</option>
+        <option value="Water Supply">Water Supply</option>
+        <option value="Garbage Collection">Garbage Collection</option>
+        <option value="Streetlights">Streetlights</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="location" class="form-label">Location</label>
+      <input type="text" class="form-control" id="location" name="location" required>
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="image" class="form-label">Upload Image (optional)</label>
+      <input type="file" class="form-control" id="image" name="image" accept="image/*">
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Submit Report</button>
+  </form>
+</div>
+{% endblock %}
