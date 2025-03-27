@@ -166,7 +166,7 @@ if __name__ == '__main__':
         test_user = User.query.filter_by(username='testuser').first()
         if not test_user:
             hashed_pw = bcrypt.generate_password_hash('testpass').decode('utf-8')
-            test_user = User(username='testuser', email='testuser@example.com', password='testpass')
+            test_user = User(username='testuser', email='testuser@example.com', password=hashed_pw)
             db.session.add(test_user)
             db.session.commit()
             print("Test user created: username 'testuser', password 'testpass'")
